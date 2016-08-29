@@ -1,0 +1,99 @@
+\documentclass[]{beamer}
+
+\usetheme[titletoc]{CleanEUR}
+
+\usepackage[light,sfdefault]{roboto}
+\usepackage{color}
+
+\title{Example Use of Minimalist EUR Beamer Style}
+\author{Gertjan van den Burg}
+\date{\today}
+\institute{Econometric Institute}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+%============================================================================
+
+\section{Introduction}
+\begin{frame}
+	\frametitle{A Frame}
+	\framesubtitle{Bullet points}
+	Some text
+	\begin{itemize}
+		\item First thing
+		\begin{itemize}
+			\item small point
+			\item fine print
+		\end{itemize}
+		\item Second thing
+		\begin{enumerate}
+			\item point A
+			\item point B
+		\end{enumerate}
+		\item Third thing
+		\begin{description}
+			\item[Research:] the scientific pursuit for knowledge
+		\end{description}
+	\end{itemize}
+\end{frame}
+
+\subsection{Text}
+\begin{frame}
+	\frametitle{Some text}
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
+	eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+	minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
+	ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
+	voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur 
+	sint occaecat cupidatat non proident, sunt in culpa qui officia 
+	deserunt mollit anim id est laborum.
+\end{frame}
+
+\subsection{Blocks}
+\begin{frame}[t]
+	\frametitle{Blocks}
+	\begin{definition}[Greetings]
+		Hello World
+	\end{definition}
+
+	\begin{theorem}[Fermat's Last Theorem]
+		$a^n + b^n = c^n, n \leq 2$
+	\end{theorem}
+
+	\begin{alertblock}{Alert}
+		By the pricking of my thumbs.
+	\end{alertblock}
+
+	\begin{exampleblock}{Example}
+		Something evil this way comes.
+	\end{exampleblock}
+
+\end{frame}
+
+\section{Usage}
+\begin{frame}[fragile]{Style usage}
+	Include using:\\
+	\verb+\usetheme{CleanEUR}+ \\
+	\verb+\usepackage[light,sfdefault]{roboto}+\\
+	\vskip\baselineskip
+	Options to the package
+	\begin{itemize}
+		\item titletoc: show table of contents on the titlepage
+		\item nologo: don't show a logo on the titlepage and in the 
+			bottom left corner
+	\end{itemize}
+	Example:\\
+	\verb+\usetheme[nologo,titletoc]{CleanEUR}+\\
+	\verb+\usepackage[light,sfdefault]{roboto}+
+\end{frame}
+
+\section{Three}
+\begin{frame}[plain]
+	We can also get a frame without decorations, by using the plain option.
+\end{frame}
+
+\end{document}

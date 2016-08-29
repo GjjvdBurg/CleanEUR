@@ -1,0 +1,188 @@
+% Copyright 2013 Gertjan van den Burg
+% 
+% Unofficial Beamer style for the Erasmus University Rotterdam
+%
+% This file is released under the GPL license.
+
+\ProvidesPackage{beamerthemeCleanEUR}%
+[2016/08/24 v0.1 clean beamer style]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Font definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\AtBeginDocument{%
+	\RequirePackage[T1]{fontenc}%
+%	\RequirePackage[light,sfdefault]{roboto}%
+	\RequirePackage{etoolbox}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colour definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parse options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newif\if@titletoc
+\newif\if@nologo
+\DeclareOption{titletoc}{\@titletoctrue}
+\DeclareOption{nologo}{\@nologotrue}
+\DeclareOption*{\PackageWarning{beamerthemeCleanEUR}{Unknown option 
+		`\CurrentOption'}}
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set \emph command to specified colour.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\myemph}[1]{{\bfseries #1}}
+\let\emph\myemph
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Outer theme
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[width=.00\paperwidth]{sidebar}
+\setlength{\beamer@headheight}{.120\paperheight}
+\setbeamertemplate{sidebar left}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Image declarations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pgfdeclareimage[width=40px]{tiny-logo}{EUR_signature.pdf}
+\pgfdeclareimage[width=.5\paperwidth]{main-logo}{EURlogo_zw_en.pdf}
+
+% Set titlepage logo depending on option
+\if@nologo
+\titlegraphic{}
+\else
+\titlegraphic{\pgfuseimage{main-logo}}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Frame title definitions 
+% Includes spacing above and below frametitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addtobeamertemplate{frametitle}{\vskip0.25ex}{%
+\vskip-5px
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Headline definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addtobeamertemplate{headline}{\vskip0.0ex}{%
+	\leavevmode%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Footline specification
+% The height size of the beamercolorbox 
+% must be at least as high as the horizontal yellow line
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{footline}{%
+	%\begin{beamercolorbox}[wd=.95\paperwidth,ht=4.25ex,dp=3ex,leftskip=3ex]{black}%
+	\begin{beamercolorbox}[wd=\paperwidth,dp=2em,leftskip=3ex, 
+		rightskip=3ex]{black}%
+		\if@nologo
+		\hfill%
+		\insertframenumber/\,\inserttotalframenumber
+		\else
+		\rlap{\raisebox{-1.50ex}[0pt][0pt]{\makebox[\paperwidth][l]{%
+					\pgfuseimage{tiny-logo}}}}%
+		\hfill%
+		\insertframenumber/\inserttotalframenumber
+		\fi
+	\end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page definitions
+% hspace corrects for the sidebar shift in other frames
+% There is probably a better way to do this than putting
+% everything in its own colorbox.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\defbeamertemplate*{title page}{customized}[1][]
+{%
+	\vfill
+	%\hspace*{-0.06\paperwidth}
+	\setbeamercolor{title}{bg=white,fg=black}
+	\begin{beamercolorbox}[sep=8pt,center]{title}
+		\usebeamerfont{title}{\inserttitle}
+	\end{beamercolorbox}
+	\par
+	%\hspace*{-0.07\paperwidth}
+	\setbeamercolor{subtitle}{bg=white,fg=black}
+	\begin{beamercolorbox}[sep=8pt,center]{subtitle}
+		\usebeamerfont{subtitle}\insertsubtitle\par
+	\end{beamercolorbox}
+	\bigskip
+	%\hspace*{-0.07\paperwidth}
+	\setbeamercolor{author}{bg=white,fg=black}
+	\begin{beamercolorbox}[sep=8pt,center]{author}
+		\usebeamerfont{author}\insertauthor\par
+	\end{beamercolorbox}
+	\par
+	%\hspace*{-0.07\paperwidth}
+	\setbeamercolor{institute}{bg=white,fg=black}
+	\begin{beamercolorbox}[sep=2pt,center]{institute}
+		\usebeamerfont{institute}\insertinstitute\par
+	\end{beamercolorbox}
+	\par
+	%\hspace*{-0.07\paperwidth}
+	\setbeamercolor{date}{bg=white,fg=black}
+	\begin{beamercolorbox}[sep=8pt,center]{date}
+		\usebeamerfont{date}\insertdate\par
+	\end{beamercolorbox}
+	\vfill
+	\if@titletoc
+	\begin{columns}
+		\column{.30\linewidth}
+		\setbeamertemplate{section in toc}{{\quad\scriptsize
+			\inserttocsectionnumber.~
+			\inserttocsection}}
+		\makeatletter
+		\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip-0.2em}{}{}
+		\makeatother
+		\flushleft
+		{\footnotesize Outline:}
+		\vskip0.2em
+		\tableofcontents[hideallsubsections]
+		\column{.70\linewidth}
+		\flushleft
+		\setbeamercolor{titlegraphic}{bg=white,fg=black}
+		\begin{beamercolorbox}[sep=8pt,center]{titlegraphic}
+			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+		\end{beamercolorbox}
+	\end{columns}
+	\else
+	%\hspace*{-0.07\paperwidth}
+	\setbeamercolor{titlegraphic}{bg=white,fg=black}
+	\begin{beamercolorbox}[sep=8pt,center]{titlegraphic}
+		\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+	\end{beamercolorbox}
+	\fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inner Theme
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useinnertheme{rectangles}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[default]
+\setbeamertemplate{enumerate items}[default]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colours
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% structure colour
+\usecolortheme[named=black]{structure}
+% titlepage definitions
+\setbeamercolor{title page}{fg=black}
+\setbeamercolor{logo}{bg=white}
+% frametitle background
+\setbeamercolor{frametitle}{fg=black,bg=white}
+% blocks
+\setbeamercolor{block title}{bg=black!20!white,fg=structure}
+\setbeamercolor{block body}{bg=black!05!white}
+\setbeamercolor{block title alerted}{bg=black!20!white,fg=red}
+\setbeamercolor{block body alerted}{bg=black!05!white}
+\setbeamercolor{block title example}{bg=black!20!white}
+\setbeamercolor{block body example}{bg=black!05!white}
