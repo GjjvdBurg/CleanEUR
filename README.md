@@ -37,7 +37,7 @@ Installation
 	 texhash or mktexlsr.  Summarizing:
 
              mkdir -p ~/texmf/tex/latex/beamer
-	     git clone https://github.com/GjjvdBurg/CleanEUR.git ~/texmf/tex/latex/beamer/cleaneur
+             git clone https://github.com/GjjvdBurg/CleanEUR.git ~/texmf/tex/latex/beamer/cleaneur
              sudo texhash
 
 - Windows: See http://tex.stackexchange.com/a/2066. Create a tex folder 
